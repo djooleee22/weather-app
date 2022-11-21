@@ -1,0 +1,21 @@
+#next-day {
+  width: 20%;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.274);
+  text-align: center;
+  padding: 15px 8px 10px 8px;
+  height: 190px;
+  .day-sm {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  img {
+    width: 50px;
+    margin-bottom: 10px;
+  }
+  .comment-sm {
+    font-size: 15px;
+    margin-bottom: 6px;
+    min-height: 40px;
+  }
+}

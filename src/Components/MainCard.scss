@@ -1,0 +1,83 @@
+#main-card {
+  color: white;
+  width: 100%;
+  //   border: 2px solid white;
+  height: 350px;
+  border-radius: 10px;
+  display: flex;
+  .left {
+    width: 30%;
+    // border-right: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.274);
+    border-radius: 10px;
+    .helper {
+      padding: 10px 20px 10px 30px;
+      height: 100%;
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      img {
+        width: 55%;
+      }
+      .temp {
+        font-size: 50px;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+      .time-date {
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+      .comment {
+        font-size: 24px;
+      }
+      .region {
+        display: flex;
+        font-size: 18px;
+        align-items: center;
+        img {
+          width: 50%;
+        }
+      }
+    }
+  }
+  .right {
+    width: 70%;
+    border-radius: 10px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .next {
+      display: flex;
+      gap: 10px;
+    }
+    .more-info {
+      display: flex;
+      gap: 10px;
+      .rain,
+      .humidity,
+      .wind,
+      .air {
+        width: 30%;
+        border-radius: 10px;
+        padding: 10px 18px;
+        height: 150px;
+        background-color: rgba(255, 255, 255, 0.274);
+        text-align: center;
+        font-size: 24px;
+        img {
+          height: 30%;
+          display: block;
+          margin: 10px auto;
+        }
+        & > div {
+          font-size: 40px;
+          // margin-top: 000px;
+        }
+      }
+    }
+  }
+}
