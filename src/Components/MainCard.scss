@@ -7,7 +7,6 @@
   display: flex;
   .left {
     width: 30%;
-    // border-right: 1px solid white;
     background-color: rgba(255, 255, 255, 0.274);
     border-radius: 10px;
     .helper {
@@ -24,22 +23,20 @@
       .temp {
         font-size: 50px;
         font-weight: 500;
-        margin-bottom: 15px;
       }
       .time-date {
         font-size: 22px;
-        margin-bottom: 15px;
       }
       .comment {
         font-size: 24px;
+        max-height: 45px;
       }
       .region {
         display: flex;
         font-size: 18px;
         align-items: center;
-        img {
-          width: 50%;
-        }
+        color: rgba(0, 0, 0, 0.822);
+        font-weight: 600;
       }
     }
   }
