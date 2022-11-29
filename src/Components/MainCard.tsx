@@ -4,11 +4,11 @@ import NextDay from "./NextDay";
 import { FetchedData } from "../App";
 
 interface NextDaysData {
-  comment: string;
-  day: string;
-  iconURL: string;
-  max_temp: { c: number; f: number };
-  min_temp: { c: number; f: number };
+  conditions: string;
+  datetime: string;
+  icon: string;
+  tempmax: number
+  tempmin: number;
 }
 
 interface MainCardProps extends FetchedData {
@@ -20,24 +20,22 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
   const [nextDays, setNextDays] = useState<NextDaysData[]>([]);
   useEffect(() => {
     const filtered = props!.next_days.filter(
-      (el, i) => i > 0 && i < props!.next_days.length - 1
+      (el, i) => i > 0 && i < 7
     );
     setNextDays(filtered);
-  }, []);
+  }, [props]);
 
   return (
     <div id="main-card">
       <div className="left">
         <div className="helper">
-          <img src={props?.currentConditions.iconURL} alt="icon" />
+          <img src={props?.currentConditions.icon} alt="icon" />
           <div className="temp">
-            {props?.celsius
-              ? props?.currentConditions.temp.c
-              : props?.currentConditions.temp.f}
-            {props?.celsius ? "°C" : "°F"}
+            {props?.celsius && `${Math.round(props!.currentConditions.temp)}°C`}
+            {!props?.celsius && `${Math.round(props!.currentConditions.temp)}°F`}
           </div>
-          <div className="time-date">{props?.currentConditions.dayhour}</div>
-          <div className="comment">{props?.currentConditions.comment}</div>
+          <div className="time-date">{props?.currentConditions.datetime}</div>
+          <div className="comment">{props?.currentConditions.conditions}</div>
           <div className="region">
             <span>{props?.region}</span>
           </div>
@@ -46,7 +44,7 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
       <div className="right">
         <div className="next">
           {nextDays.map((el) => (
-            <NextDay key={el.day} data={el} celsius={props!.celsius} />
+            <NextDay key={el.datetime} data={el} celsius={props!.celsius} />
           ))}
         </div>
         <div className="more-info">
@@ -56,7 +54,7 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
               src="https://cdn-icons-png.flaticon.com/128/3313/3313888.png"
               alt="rain icon"
             />
-            <div>{props?.currentConditions.precip}</div>
+            <div>{(props?.currentConditions.precip)}%</div>
           </div>
           <div className="humidity">
             Humidity
@@ -64,7 +62,7 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
               src="https://cdn-icons-png.flaticon.com/128/5664/5664979.png"
               alt="humidity icon"
             />
-            <div>{props?.currentConditions.humidity}</div>
+            <div>{Math.round(props!.currentConditions.humidity)}%</div>
           </div>
           <div className="wind">
             Wind
@@ -72,7 +70,7 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
               src="https://cdn-icons-png.flaticon.com/128/2057/2057945.png"
               alt="wind icon"
             />
-            <div>{props?.currentConditions.wind.km}km/h</div>
+            <div>{Math.round(props!.currentConditions.windspeed)}km/h</div>
           </div>
           <div className="air">
             Air

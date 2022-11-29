@@ -5,39 +5,37 @@ import MainCard from "./Components/MainCard";
 export interface FetchedData {
   airIndex?: string;
   currentConditions: {
-    comment: string;
-    dayhour: string;
-    humidity: string;
-    iconURL: string;
-    precip: string;
-    temp: { c: number; f: number };
-    wind: { km: number; mile: number };
+    conditions: string;
+    datetime: string;
+    humidity: number;
+    icon: string;
+    precip: number;
+    temp: number;
+    windspeed: number;
   };
   region: string;
   next_days: {
-    comment: string;
-    day: string;
-    iconURL: string;
-    max_temp: { c: number; f: number };
-    min_temp: { c: number; f: number };
+    conditions: string;
+    datetime: string;
+    icon: string;
+    tempmax: number;
+    tempmin: number;
   }[];
 }
-
-const key = "89b26d36-5c22-49ee-b703-d5fb3d224ecc";
 
 function App() {
   const [data, setData] = useState<FetchedData | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [airIndex, setAirIndex] = useState<string>("X");
+  const [airIndex] = useState<string>("X");
   const [celsius, setCelsius] = useState<boolean>(true);
   const fetchData = () => {
-    fetch("https://weatherdbi.herokuapp.com/data/weather/belgrade")
+    fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/belgrade?unitGroup=metric&include=current%2Cdays&key=UXMVW67DY9BWJ9TT7NTQJABPV&contentType=json")
       .then((res) => res.json())
       .then((dataRes) => {
         setData({
           currentConditions: dataRes.currentConditions,
-          region: dataRes.region,
-          next_days: dataRes.next_days,
+          region: dataRes.timezone,
+          next_days: dataRes.days,
         });
       });
   };

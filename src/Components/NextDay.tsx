@@ -3,11 +3,11 @@ import "./NextDay.scss";
 
 interface NextDayProps {
   data: {
-    comment: string;
-    day: string;
-    iconURL: string;
-    max_temp: { c: number; f: number };
-    min_temp: { c: number; f: number };
+    conditions: string;
+    datetime: string;
+    icon: string;
+    tempmax: number;
+    tempmin: number;
   };
   celsius: boolean;
 }
@@ -15,16 +15,16 @@ interface NextDayProps {
 const NextDay: React.FC<NextDayProps> = (props) => {
   const minMax = () => {
     if (props.celsius) {
-      return `${props.data.min_temp.c}°C - ${props.data.max_temp.c}°C`;
+      return `${Math.round(props.data.tempmin)}°C - ${Math.round(props.data.tempmax)}°C`;
     } else {
-      return `${props.data.min_temp.f}°F - ${props.data.max_temp.f}°F`;
+      return `${Math.round(props.data.tempmin)}°F - ${Math.round(props.data.tempmax)}°F`;
     }
   };
   return (
     <div id="next-day">
-      <div className="day-sm">{props.data.day}</div>
-      <img src={props.data.iconURL} alt="icon" />
-      <div className="comment-sm">{props.data.comment}</div>
+      <div className="day-sm">{props.data.datetime}</div>
+      <img src={props.data.icon} alt="icon" />
+      <div className="comment-sm">{props.data.conditions}</div>
       <div className="min-max">{minMax()}</div>
     </div>
   );
