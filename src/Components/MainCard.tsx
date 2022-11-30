@@ -18,6 +18,7 @@ interface MainCardProps extends FetchedData {
 
 const MainCard: React.FC<MainCardProps | null> = (props) => {
   const [nextDays, setNextDays] = useState<NextDaysData[]>([]);
+  const [airInfoOpened, setAirInfoOpened] = useState<boolean>(false)
   useEffect(() => {
     const filtered = props!.next_days.filter(
       (el, i) => i > 0 && i < 7
@@ -29,10 +30,10 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
     <div id="main-card">
       <div className="left">
         <div className="helper">
-          <img src={props?.currentConditions.icon} alt="icon" />
+          <img src={require(`../Icons/${props!.currentConditions.icon}.svg`)} alt="icon" />
           <div className="temp">
             {props?.celsius && `${Math.round(props!.currentConditions.temp)}°C`}
-            {!props?.celsius && `${Math.round(props!.currentConditions.temp)}°F`}
+            {!props?.celsius && `${Math.round(props!.currentConditions.temp*1.8+32)}°F`}
           </div>
           <div className="time-date">{props?.currentConditions.datetime}</div>
           <div className="comment">{props?.currentConditions.conditions}</div>
@@ -79,6 +80,13 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
               alt="air icon"
             />
             <div>{props?.airIndex}</div>
+            <div className="info" onClick={()=>setAirInfoOpened(true)}>i</div>
+            <div className={airInfoOpened ? "modal" : "modal hidden"}>
+              <div>
+                <div>Currently not available😔</div>
+                <div className="close" onClick={()=>setAirInfoOpened(false)}>x</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

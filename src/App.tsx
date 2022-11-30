@@ -44,13 +44,13 @@ function App() {
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
     const enteredText = inputRef.current!.value.toLowerCase();
-    fetch(`https://weatherdbi.herokuapp.com/data/weather/${enteredText}`)
+    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${enteredText}?unitGroup=metric&include=current%2Cdays&key=UXMVW67DY9BWJ9TT7NTQJABPV&contentType=json`)
       .then((res) => res.json())
       .then((dataRes) => {
         setData({
           currentConditions: dataRes.currentConditions,
-          region: dataRes.region,
-          next_days: dataRes.next_days,
+          region: dataRes.timezone,
+          next_days: dataRes.days,
         });
         inputRef.current!.value = "";
       });
