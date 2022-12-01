@@ -43,7 +43,11 @@ function App() {
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    const enteredText = inputRef.current!.value.toLowerCase();
+    let enteredText = inputRef.current!.value.toLowerCase();
+    if(inputRef.current!.value.split.length > 1){
+      const newValue = inputRef.current!.value.split(" ");
+      enteredText = newValue.join("%20").toLowerCase()
+    }
     fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${enteredText}?unitGroup=metric&include=current%2Cdays&key=UXMVW67DY9BWJ9TT7NTQJABPV&contentType=json`)
       .then((res) => res.json())
       .then((dataRes) => {

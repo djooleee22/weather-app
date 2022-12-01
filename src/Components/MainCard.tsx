@@ -35,7 +35,7 @@ const MainCard: React.FC<MainCardProps | null> = (props) => {
             {props?.celsius && `${Math.round(props!.currentConditions.temp)}°C`}
             {!props?.celsius && `${Math.round(props!.currentConditions.temp*1.8+32)}°F`}
           </div>
-          <div className="time-date">{props?.currentConditions.datetime}</div>
+          <div className="time-date">Last updated: {props?.currentConditions.datetime}</div>
           <div className="comment">{props?.currentConditions.conditions}</div>
           <div className="region">
             <span>{props?.region}</span>
