@@ -1,0 +1,33 @@
+$marbot: 25px;
+#popular-card {
+    background-color: rgba(255, 255, 255, 0.274);
+    width: 23%;
+    border-radius: 5px;
+    color: white;
+    padding: 20px 25px;
+    text-align: center;
+
+    .city {
+        font-size: 22px;
+        margin-bottom: $marbot;
+        font-weight: 500;
+    }
+
+    .img-box {
+        img{
+            height: 90px;
+        }
+        margin-bottom: $marbot;
+    }
+    .temp{
+        font-size: 30px;
+        margin-bottom: $marbot;
+    }
+    .comment{
+        font-size: 24px;
+        margin-bottom: $marbot;
+    }
+    .wind {
+        margin-bottom: 18px;
+    }
+}
