@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef, FormEvent } from "react";
 import "./App.scss";
 import MainCard from "./Components/MainCard";
 import Popular from "./Components/Popular";
+// import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CircularProgress } from "@mui/material";
 
 export interface FetchedData {
   airIndex?: string;
@@ -73,9 +75,15 @@ function App() {
 
   return (
     <div id="App">
-      <div className="change-page" onClick={() => setHomeOpen(!homeOpen)}>
+      <div
+        className="change-page"
+        onClick={() => {
+          setHomeOpen(!homeOpen);
+        }}
+      >
         {homeOpen ? "POPULAR" : "HOME"}
       </div>
+
       {homeOpen && (
         <div className="wrapper">
           <div className="buttons">
