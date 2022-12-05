@@ -12,25 +12,17 @@
   align-items: center;
   font-family: "Roboto", sans-serif;
   position: relative;
-
-  .fade-enter{
-    // opacity: 0;
-    // transition: all 2s;
+  
+  .fade-appear {
+    opacity: 0;
     transform: translateY(-100%);
   }
-
-  .fade-enter-active {
+  .fade-appear.fade-appear-active {
+     opacity: 1;
     transform: translateY(0);
+    transition: all 1000ms linear;
   }
 
-  .fade-exit {
-    transform: translateY(0);
-  }
-
-  .fade-exit-active {
-    transform: translateY(100%);
-  }
-  
   .change-page {
     display: inline-block;
     position: fixed;  
@@ -46,7 +38,6 @@
     transition: all 0.5s;
     &:hover {
       background-color: lightblue;
-    
     }
   }
 

@@ -8,6 +8,11 @@
     justify-content: space-between;
     position: relative;
 
+    .wrapper {
+      @extend #popular;
+      width: 100%;
+    }
+
     .spinner {
       position: absolute;
       left: 50%;

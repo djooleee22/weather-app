@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef, FormEvent } from "react";
+import { useEffect, useState, useRef, FormEvent } from "react";
 import "./App.scss";
 import MainCard from "./Components/MainCard";
 import Popular from "./Components/Popular";
-// import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { CircularProgress } from "@mui/material";
+import { CSSTransition } from "react-transition-group";
 
 export interface FetchedData {
   airIndex?: string;
@@ -83,37 +82,44 @@ function App() {
       >
         {homeOpen ? "POPULAR" : "HOME"}
       </div>
-
-      {homeOpen && (
-        <div className="wrapper">
-          <div className="buttons">
-            <button
-              className={celsius ? "active" : ""}
-              onClick={() => setCelsius(true)}
-            >
-              °C
-            </button>
-            <button
-              className={!celsius ? "active" : ""}
-              onClick={() => setCelsius(false)}
-            >
-              °F
-            </button>
+      {homeOpen ? (
+        <CSSTransition
+          in={homeOpen}
+          appear={homeOpen}
+          timeout={1000}
+          classNames="fade"
+        >
+          <div className="wrapper">
+            <div className="buttons">
+              <button
+                className={celsius ? "active" : ""}
+                onClick={() => setCelsius(true)}
+              >
+                °C
+              </button>
+              <button
+                className={!celsius ? "active" : ""}
+                onClick={() => setCelsius(false)}
+              >
+                °F
+              </button>
+            </div>
+            <form onSubmit={submitHandler}>
+              <input type="text" placeholder="Enter city name" ref={inputRef} />
+            </form>
+            <MainCard
+              currentConditions={data?.currentConditions}
+              region={data?.region}
+              next_days={data?.next_days}
+              airIndex={airIndex}
+              celsius={celsius}
+              setCelsius={setCelsius}
+            />
           </div>
-          <form onSubmit={submitHandler}>
-            <input type="text" placeholder="Enter city name" ref={inputRef} />
-          </form>
-          <MainCard
-            currentConditions={data?.currentConditions}
-            region={data?.region}
-            next_days={data?.next_days}
-            airIndex={airIndex}
-            celsius={celsius}
-            setCelsius={setCelsius}
-          />
-        </div>
+        </CSSTransition>
+      ) : (
+        <Popular />
       )}
-      {!homeOpen && <Popular />}
     </div>
   );
 }

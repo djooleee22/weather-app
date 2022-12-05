@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Popular.scss";
 import PopularCard from "./PopularCard";
 import { CircularProgress } from "@mui/material";
+import { CSSTransition } from "react-transition-group";
 
 interface CityState {
   timezone: string;
@@ -44,6 +45,7 @@ const Popular: React.FC = (props) => {
   const [madrid, setMadrid] = useState<CityState>(initialState);
   const [cels, setCels] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
+  const [fade] = useState<boolean>(true);
 
   //had some bug with Promise.all,try again later
   useEffect(() => {
@@ -67,33 +69,38 @@ const Popular: React.FC = (props) => {
       );
 
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   return (
     <div id="popular">
       {loading && <CircularProgress className="spinner" />}
       {!loading && (
-        <>
-          <div className="buttons">
-            <button
-              className={cels ? "active" : ""}
-              onClick={() => setCels(true)}
-            >
-              °C
-            </button>
-            <button
-              className={!cels ? "active" : ""}
-              onClick={() => setCels(false)}
-            >
-              °F
-            </button>
+        // <>
+        <CSSTransition in={fade} appear={fade} timeout={1000} classNames="fade">
+          <div className="wrapper">
+            <div className="buttons">
+              <button
+                className={cels ? "active" : ""}
+                onClick={() => setCels(true)}
+              >
+                °C
+              </button>
+              <button
+                className={!cels ? "active" : ""}
+                onClick={() => setCels(false)}
+              >
+                °F
+              </button>
+            </div>
+
+            <PopularCard data={london} name="London" cels={cels} />
+            <PopularCard data={newYork} name="New York" cels={cels} />
+            <PopularCard data={moscow} name="Moscow" cels={cels} />
+            <PopularCard data={madrid} name="Madrid" cels={cels} />
           </div>
-          <PopularCard data={london} name="London" cels={cels} />
-          <PopularCard data={newYork} name="New York" cels={cels} />
-          <PopularCard data={moscow} name="Moscow" cels={cels} />
-          <PopularCard data={madrid} name="Madrid" cels={cels} />
-        </>
+        </CSSTransition>
+        // </>
       )}
     </div>
   );
